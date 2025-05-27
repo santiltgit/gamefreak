@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function FeaturedGames() {
+const [showAlert, setShowAlert] = useState(false);
+const handleAddToCart = () => {
+    setShowAlert(true);
+    setTimeout(() => setShowAlert(false), 1500);
+};
+
 const games = [
     {
     title: "JDM: Japanese Drift Master",
@@ -29,6 +35,9 @@ const games = [
 
 return (
     <div className="featured-games-container">
+    {showAlert && (
+        <div className="cart-alert" style={{position: 'fixed', top: 30, left: '50%', transform: 'translateX(-50%)', background: '#222', color: '#fff', padding: '16px 32px', borderRadius: 8, zIndex: 1000, boxShadow: '0 2px 8px rgba(0,0,0,0.2)'}}>Producto agregado al carrito</div>
+    )}
     <div className="featured-games-header">
         <nav className="featured-nav">
         <a href="#novedades" className="active">Novedades y tendencias</a>
@@ -60,6 +69,8 @@ return (
             </div>
             <span className="release-date">{game.releaseDate}</span>
             </div>
+            <button className="add-to-cart" onClick={handleAddToCart}>Añadir al carrito</button>
+            <button className="buy-now">Comprar ahora</button>
         </div>
         ))}
     </div>
